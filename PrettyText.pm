@@ -35,23 +35,33 @@ sub handler
     $TW = 4 unless defined($TW);
 
     ## Detab
+
 	$contents =~ s{^(.*)}
 	{my $X=$1;
 	 while($X=~s/^(.*?)\t/$1.' 'x($TW-length($1)%$TW)/e){}; $X
 	 }meg if $TW > 1;
-	
-	## Wrap in a simple HTML page
-    my ($title) = ($contents =~ /^(.*)/);
-    $contents = "<HTML><HEAD><TITLE>$title</TITLE></HEAD>
-                 <BODY BGCOLOR=white><PRE>\n$contents\n</PRE></BODY></HTML>";
-	
+
+	## Quote <, > and & characters, allowing HTML markups to appear as
+	## such.
+
+	$contents =~ s/&/&amp;/g;
+	$contents =~ s/</&lt;/g;
+	$contents =~ s/>/&gt;/g;
+
 	## Make URLS into links
+
 	$contents =~ s{\b((s?https?|ftp|gopher|news|telnet|wais|mailto):
 					   (//[-a-zA-Z0-9_\.]+:[0-9]*)?
 						   [-a-zA-Z0-9_=?#$@~`%&*+|\/\.,]*
 							[-a-zA-Z0-9_=#$@~`%&*+|\/])}
 							 {<A HREF="$1">$1</A>}igx;
 							 
+	## Wrap in a simple HTML page
+
+    my ($title) = ($contents =~ /^(.*)/);
+    $contents = "<HTML><HEAD><TITLE>$title</TITLE></HEAD>
+                 <BODY BGCOLOR=white><PRE>\n$contents\n</PRE></BODY></HTML>";
+
     $r->content_type("text/html");
     $r->send_http_header;
     $r->print($contents);
