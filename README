@@ -1,0 +1,39 @@
+Apache::PrettyText - A very simple apache mod_perl PerlHandler for text files
+
+To modify your Apache server to dynamically format .txt files so they
+look nicer in the client's browser, put the following directives into
+httpd.conf, or in any VirtualHost section and restart the server.
+
+Optional: Insert a <Perl> section that changes
+$Apache::PrettyText::TabWidth to your site's standard or set to 0 to
+disable detabbing.  If you don't set it, the default is 4.
+
+    <Perl>
+    $Apache::PrettyText::TabWidth = 4;
+    </Perl>
+
+    <Files ~ "\.txt$">
+    SetHandler perl-script
+    PerlHandler Apache::PrettyText
+    </Files>
+
+You must be using mod_perl. See http://perl.apache.org for details.
+
+
+BUILDING
+
+perl Makefile.PL
+make
+make test
+make install
+
+
+FURTHER INFO
+
+Either see the source and documentation in PrettyText.pm, or, after
+installing, read the man page using "man Apache::PrettyText".
+
+
+FEEDBACK TO
+
+Chris Thorman, chris@thorman.com
