@@ -1,4 +1,8 @@
-Revision history for Perl extension Apache::PrettyText.
+Revision history for Apache::PrettyText.
+
+1.05 Tue Apr 30 2002 
+	
+	- Cleaned up the build and docs.  Created a project home page.
 
 1.04 Thu May 31 2001 
 

@@ -1,9 +1,36 @@
-#!/usr/bin/perl
-
 use ExtUtils::MakeMaker;
 # See lib/ExtUtils/MakeMaker.pm for details of how to influence
 # the contents of the Makefile that is written.
+
+my $Top = 'Apache';
+my $Mod = 'PrettyText';
+
 WriteMakefile(
-    'NAME'	=> 'Apache::PrettyText',
-    'VERSION_FROM' => 'PrettyText.pm', # finds $VERSION
-);
+			  NAME			=> "${Top}::${Mod}",
+			  DISTNAME		=> "${Top}-${Mod}",
+			  VERSION_FROM	=> "$Mod.pm",
+			  ABSTRACT_FROM	=> "$Mod.pm",
+			  PREREQ_PM		=> {(
+								 "Apache::Constants"	=> 0, 
+								 )},
+			  clean			=> {FILES => ".AppleDouble test/.AppleDouble *.bak $Mod.html"},
+			  );
+
+## This creates *.html from *.pm and does some cleanup by calling
+## fix_html.perl (which is so-named because if it were called
+## fix_html.pl it would get grabbed and installed by MakeMaker).
+
+## Also creates the README as the text-format perldoc output from the
+## pod in the main module's source file.
+
+sub MY::htmlifypods
+{
+	"	
+htmlifypods::
+	pod2html --noindex --css=/stylesheet/ --title=$Top::$Mod --infile=$Mod.pm --outfile=$Mod.html
+	perl fix_html.perl $Mod.html
+
+	perldoc -U -t $Top::$Mod > README
+
+";
+};

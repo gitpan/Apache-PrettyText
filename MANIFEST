@@ -1,6 +1,11 @@
-Changes
 MANIFEST
 Makefile.PL
-PrettyText.pm
+
 README
+Changes
+
+PrettyText.pm
+
 test.pl
+
+fix_html.perl
