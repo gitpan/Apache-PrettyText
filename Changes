@@ -1,5 +1,15 @@
 Revision history for Apache::PrettyText.
 
+1.07 2002-07-31
+
+	- Changed Makefile.PL's PREREQ_PM => {'Apache::Constants' => 0} to
+      PREREQ_PM => {'Apache::Constants' => '0'} in hopes of fixing a
+      testers.cpan.org complaint.
+
+1.06 2002-05-07
+
+	- Fixed build shortcoming.
+
 1.05 Tue Apr 30 2002 
 	
 	- Cleaned up the build and docs.  Created a project home page.
