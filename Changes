@@ -1,11 +1,25 @@
 Revision history for Perl extension Apache::PrettyText.
 
-1.03 Fri Aug 14 
+1.04 Thu May 31 2001 
+
+	- Added better <title> extraction.
+
+	- Added hook to allow code in httpd.conf to modify text before it
+	  goes out.
+
+1.03 Fri Aug 14
+
 	- Added quoting of <, > and &.
+
 1.02 Fri Aug 14 
+
 	- Added README in prep for upload to CPAN.
+
 1.01 Tue Aug  4 
+
 	- Added some fixes suggested by Doug M.
+
 1.0  Tue Aug  4 17:21:48 1998
+
 	- original version; created by h2xs 1.18
 

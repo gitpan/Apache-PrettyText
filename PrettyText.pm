@@ -3,7 +3,7 @@ package Apache::PrettyText;
 use strict;
 use vars qw($VERSION);
 
-$VERSION = '1.02';
+$VERSION = '1.04';
 
 use Apache::Constants ':common'; ## for OK (200) and NOT_FOUND (304)
 
@@ -49,16 +49,18 @@ sub handler
 	$contents =~ s/>/&gt;/g;
 
 	## Make URLS into links
-
+	
 	$contents =~ s{\b((s?https?|ftp|gopher|news|telnet|wais|mailto):
-					   (//[-a-zA-Z0-9_\.]+:[0-9]*)?
-						   [-a-zA-Z0-9_=?#$@~`%&*+|\/\.,]*
-							[-a-zA-Z0-9_=#$@~`%&*+|\/])}
-							 {<A HREF="$1">$1</A>}igx;
-							 
+					  (//[-a-zA-Z0-9_\.]+:[0-9]*)?
+					  [-a-zA-Z0-9_=?#$@~`%&*+|\/\.,]*
+					   [-a-zA-Z0-9_=#$@~`%&*+|\/])}
+						{<A HREF="$1">$1</A>}igx;
+						
+	&$Apache::PrettyText::TextCleanHook(\$contents) if ref($Apache::PrettyText::TextCleanHook) eq 'CODE';
+
 	## Wrap in a simple HTML page
 
-    my ($title) = ($contents =~ /^(.*)/);
+    my ($title) = ($contents =~ /(\w.*)/);
     $contents = "<HTML><HEAD><TITLE>$title</TITLE></HEAD>
                  <BODY BGCOLOR=white><PRE>\n$contents\n</PRE></BODY></HTML>";
 
@@ -163,9 +165,7 @@ in the httpd.conf file.
 
 =head1 AUTHOR
 
-	Chris Thorman <chris@thorman.com>
-	Ignition, Inc.
-	http://ignitiondesign.com
+Chris Thorman <chris@thorman.com>
 
 Thanks to Vivek Khera, Doug MacEachern, Jeffrey William Baker for
 suggestions and corrections.
@@ -173,7 +173,7 @@ suggestions and corrections.
 =head1 COPYRIGHT
 
 Available for use by anyone under the GNU General Public License.  Not
-really supported, but further comments, suggestions, and corrections
+formally supported, but further comments, suggestions, and corrections
 are heartily solicited.
 
 =head1 SEE ALSO
