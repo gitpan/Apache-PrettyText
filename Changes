@@ -1,5 +1,9 @@
 Revision history for Apache::PrettyText.
 
+1.08 2004-02-19
+
+	- Removed dependency on Apache::Constants altogether.
+
 1.07 2002-07-31
 
 	- Changed Makefile.PL's PREREQ_PM => {'Apache::Constants' => 0} to

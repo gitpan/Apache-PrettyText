@@ -11,7 +11,6 @@ WriteMakefile(
 			  VERSION_FROM	=> "$Mod.pm",
 			  ABSTRACT_FROM	=> "$Mod.pm",
 			  PREREQ_PM		=> {(
-								 "Apache::Constants"	=> '0', 
 								 )},
 			  clean			=> {FILES => ".AppleDouble test/.AppleDouble *.bak $Mod.html"},
 			  );

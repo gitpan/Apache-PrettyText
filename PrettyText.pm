@@ -5,7 +5,7 @@ use strict;
 
 package Apache::PrettyText;
 
-use vars qw($VERSION);				$VERSION = '1.07';
+use vars qw($VERSION);				$VERSION = '1.08';
 
 =pod
 
@@ -134,9 +134,11 @@ The implementation in PrettyText.pm.
 Thanks to Vivek Khera, Doug MacEachern, Jeffrey William Baker for
 suggestions and corrections.
 
-=cut
+=cut {};
 
-use Apache::Constants ':common'; ## for OK (200) and NOT_FOUND (304)
+## use Apache::Constants ':common'; ## for OK (200) and NOT_FOUND (304)
+use constant OK			=> 200;
+use constant NOT_FOUND	=> 304;
 
 sub handler
 {
