@@ -63,7 +63,7 @@ INSTALLATION
     reading the source code in PrettyText.pm, you can copy this file under
     the name "PrettyText.pm" into this location:
 
-        /usr/lib/perl5/site_perl/Apache/
+            /usr/lib/perl5/site_perl/Apache/
 
     ... or its equivalent on your computer.
 

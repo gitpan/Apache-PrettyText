@@ -5,7 +5,7 @@ use strict;
 
 package Apache::PrettyText;
 
-use vars qw($VERSION);				$VERSION = '1.05';
+use vars qw($VERSION);				$VERSION = '1.06';
 
 =pod
 
